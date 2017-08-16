@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="static" :class="{active:isActive}">{{message}}</div>
+    <div :class="classObj">{{message}}</div>
+</div>
+
+</body>
+<!--class与style绑定-->
+<script src="vue.js"></script>
+<script>
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            message:"哈哈哈",
+            isActive:true,
+            error:null
+        },
+        computed:{
+            classObj:function () {
+                return{
+                    active:this.error&&this.isActive
+                }
+            }
+        }
+    })
+
+</script>
+</html>

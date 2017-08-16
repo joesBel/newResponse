@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <h1 v-if="ok">{{text}}</h1>
+        <h5 v-if="type==='A'">a</h5>
+        <h5 v-else-if="type==='B'">b</h5>
+        <h5 v-else>c</h5>
+
+        <div v-show="show_one">httttt</div>
+        <div v-show="show_two">oooooo</div>
+        <!--此时在代码切换logintype时，不会清楚清楚用户输入的内容，因为两个模板使用相同的元素-->
+        <!--但是当在input上添加了key时，就不会再公用。-->
+        <template v-if="loginType==='username'">
+            <input type="text" placeholder="username" key="username">
+            <label >username</label>
+        </template>
+        <template v-else>
+            <input type="text" placeholder="email" key="email">
+            <label >email</label>
+        </template>
+        <button @click="toggle">qiehuan</button>
+    </div>
+</body>
+<!--条件渲染-->
+<script src="vue.js"></script>
+<script>
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            text:"hahaah",
+            ok:true,
+            type:'A',
+            loginType:"username",
+            show_one:true,
+            show_two:false,
+        },
+//        因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件不太可能改变，则使用 v-if 较好。
+        methods:{
+            toggle:function () {
+                this.show_one=!this.show_one;
+                this.show_two=!this.show_two;
+                if(this.loginType==="username"){
+                    this.loginType="email"
+                }else {
+                    this.loginType="username"
+                }
+            }
+        }
+    })
+</script>
+</html>
