@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <my-child :prop-data="newData"></my-child>
+    </div>
+
+
+    <div id="app2">
+        <my-child :prop-data="twoData"></my-child>
+    </div>
+</body>
+<!--组件自定义事件-->
+<script src="vue.js"></script>
+<script>
+//    注册全局组件
+    Vue.component("my-child", {
+        props:{
+            propData:String
+        },
+        template:"<h2>{{propData}}</h2>"
+    });
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            newData:"hellowrold"
+        }
+    })
+    var vm2=new Vue({
+        el:"#app2",
+        data:{
+            twoData:"HELLOWORLD"
+        }
+    })
+
+
+
+
+</script>
+</html>

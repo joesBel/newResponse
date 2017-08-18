@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <my-component></my-component>
+        <my-title props1="!!451585"></my-title>
+
+        <child v-bind:my-message="parentMsg"></child>
+
+        <my-child-prop :get-message="getMsg"></my-child-prop>
+        <type-data :type-data="data"></type-data>
+    </div>
+</body>
+<!--组件-->
+<script src="vue.js"></script>
+<script>
+//    注册全局组件
+    Vue.component("my-component",{
+        template:'<div>A custom component!</div>',
+    });
+//    要确保在初始化根实例之前注册组件
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            parentMsg:"000",
+            getMsg:"传递过来了",
+            data:{
+                message:"检测数据"
+            }
+        },
+//        局部注册组件
+        components:{
+            "my-title":{
+//                子组件使用父组件的数据
+                props:["props1"],
+                template:'<div>child component{{message}}{{props1}}</div>',
+//                组件中的data必须是一个函数
+                data:function () {
+//                    必须return 一个数据对象
+                    return {
+                        message:"哈哈哈"
+                    }
+                }
+            },
+//            父组件传递数据给子组件
+            "child": {
+                props: ['myMessage'],
+                template: "<p>{{myMessage}}</p>",
+            },
+//            单向数据流
+//            只能父组件数据改变子组件数据
+            "my-child-prop":{
+                props:["getMessage"],
+                template: "<h2>{{newDate}}</h2>",
+                computed:{
+//                    自己重新操作子组件中的数据
+                    newDate:function () {
+                        return this.getMessage+"我是姜森"
+                    }
+                }
+            },
+//            props检测
+            "type-data":{
+                props:{
+                    "typeData":Object,
+                },
+                template:"<h2>{{typeData.message}}</h2>",
+
+            }
+        }
+
+    });
+//    prop
+
+</script>
+</html>

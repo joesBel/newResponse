@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <button @click.once="greet">3</button>
+    <a href="www.baidu.com" @click.self.prevent="get('hi',$event)">33</a>
+    <input  @keyup.enter="say" v-model="text" />
+</div>
+
+</body>
+<!--事件处理-->
+<script src="vue.js"></script>
+<script>
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            text:"",
+        },
+        methods:{
+            greet:function (event) {
+                alert(event.target.tagName)
+            },
+            get:function (msg,event) {
+                    console.log(msg);
+            },
+            say:function () {
+                alert(this.text)
+            }
+        }
+    })
+</script>
+</html>
